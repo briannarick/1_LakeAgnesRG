@@ -11,7 +11,7 @@ library(ggplot2)
 library(dplyr)
 library(gridExtra)
 
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE,  message = FALSE, warning = FALSE)
 ```
 
 
@@ -26,9 +26,9 @@ hydroAll <- read.csv("data/AllData_IonIsotope_2019_2021.csv")
 
 ## Explore the data
 
-Here we are looking at the water quality data for 7 different streams in the Lake Agnes Basin. Streams are classified as RG (purely rock glacier fed), NRG (no rock glacier source), Mixed (combination of RG and NRG sources), Outlet (outlet stream of the basin, below the lake), RGice (sample taken from the top of the RG, in contact with ice), and Snow (sample of snow). These samples were taken over the years 2019, 2020, and 2021. We are intersted in identifying similarities/differences between stream types, as well as trends throughout the season.
+Here we are looking at the water quality data for 7 different streams in the Lake Agnes Basin. Streams are classified as RG (purely rock glacier fed), NRG (no rock glacier source), Mixed (combination of RG and NRG sources), Outlet (outlet stream of the basin, below the lake), RGice (sample taken from the top of the RG, in contact with ice), and Snow (sample of snow). These samples were taken over the years 2019, 2020, and 2021. We are interested in identifying similarities/differences between stream types, as well as trends throughout the season.
 
-![Lake Agnes rock glacier location figure](data/RGlocationfig.jpg)
+![](data/RGlocationfig.jpg)
 
 ### Total Dissolved Nitrogen
 
@@ -151,11 +151,52 @@ ggplot()+
   facet_grid(~SType)
 ```
 
+
+### pH
+
+```{r pH, fig.width=8, fig.height=3}
+ggplot()+
+  geom_point(aes(x = DOY, y = pH, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  facet_grid(~SType)
+```
+
+### Conductivity
+
+```{r EC, fig.width=8, fig.height=3}
+ggplot()+
+  geom_point(aes(x = DOY, y = conductivity, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  facet_grid(~SType)
+```
+
+### Water Temperature
+
+```{r waterT, fig.width=8, fig.height=3}
+ggplot()+
+  geom_point(aes(x = DOY, y = Water.T, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  facet_grid(~SType)
+```
+
 ### Delta-O-18
 
 ```{r d18O, fig.width=8, fig.height=3}
 ggplot()+
   geom_point(aes(x = DOY, y = d18O, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  facet_grid(~SType)
+```
+
+### Hydrogen Isotope Composition
+
+```{r d2H, fig.width=8, fig.height=3}
+ggplot()+
+  geom_point(aes(x = DOY, y = d2H, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
   theme_bw()+
   theme(legend.position = c(.9, .1))+
   facet_grid(~SType)
