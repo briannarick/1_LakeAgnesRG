@@ -2,7 +2,10 @@
 title: "Lake Agnes Rock Glacier Water Quality"
 author: "Bri Rick"
 date: "March 23, 2022"
-output: html_document
+output: 
+  html_document:
+    toc: true
+    toc_float: true
 ---
 
 ```{r download-packages, include=FALSE}
@@ -24,7 +27,7 @@ hydroAll <- read.csv("data/AllData_IonIsotope_2019_2021.csv")
 
 ```
 
-## Explore the data
+### Explore the data
 
 Here we are looking at the water quality data for 7 different streams in the Lake Agnes Basin. Streams are classified as RG (purely rock glacier fed), NRG (no rock glacier source), Mixed (combination of RG and NRG sources), Outlet (outlet stream of the basin, below the lake), RGice (sample taken from the top of the RG, in contact with ice), and Snow (sample of snow). These samples were taken over the years 2019, 2020, and 2021. We are interested in identifying similarities/differences between stream types, as well as trends throughout the season.
 
