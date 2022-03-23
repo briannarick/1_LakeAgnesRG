@@ -1,0 +1,163 @@
+---
+title: "Lake Agnes Rock Glacier Water Quality"
+author: "Bri Rick"
+date: "March 23, 2022"
+output: html_document
+---
+
+```{r download-packages, include=FALSE}
+
+library(ggplot2)
+library(dplyr)
+library(gridExtra)
+
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r import-data, include=FALSE}
+## Import the water quality data
+
+setwd("C:/Users/Bri/Documents/CSU/EnvDataScience2022/1_waterQA_RG")
+
+hydroAll <- read.csv("data/AllData_IonIsotope_2019_2021.csv")
+
+```
+
+## Explore the data
+
+Here we are looking at the water quality data for 7 different streams in the Lake Agnes Basin. Streams are classified as RG (purely rock glacier fed), NRG (no rock glacier source), Mixed (combination of RG and NRG sources), Outlet (outlet stream of the basin, below the lake), RGice (sample taken from the top of the RG, in contact with ice), and Snow (sample of snow). These samples were taken over the years 2019, 2020, and 2021. We are intersted in identifying similarities/differences between stream types, as well as trends throughout the season.
+
+![Lake Agnes rock glacier location figure](data/RGlocationfig.jpg)
+
+### Total Dissolved Nitrogen
+
+```{r TDN, fig.width=8, fig.height=3}
+ggplot()+
+  geom_point(aes(x = DOY, y = TDN, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  facet_grid(~SType) +
+  xlab("Day of year")
+```
+
+### Sodium
+
+```{r Na, fig.width=8, fig.height=3}
+ggplot()+
+  geom_point(aes(x = DOY, y = Na, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  facet_grid(~SType)
+```
+
+### Ammonium
+
+```{r NH4, fig.width=8, fig.height=3}
+ggplot()+
+  geom_point(aes(x = DOY, y = NH4, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  facet_grid(~SType)
+```
+
+### Potassium
+
+```{r K, fig.width=8, fig.height=3}
+ggplot()+
+  geom_point(aes(x = DOY, y = K, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  facet_grid(~SType)
+```
+
+### Magnesium
+
+```{r Mg, fig.width=8, fig.height=3}
+ggplot()+
+  geom_point(aes(x = DOY, y = Mg, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  facet_grid(~SType)
+```
+
+### Calcium
+
+```{r Ca, fig.width=8, fig.height=3}
+ggplot()+
+  geom_point(aes(x = DOY, y = Ca, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  facet_grid(~SType)
+```
+
+### Chlorine
+
+```{r Cl, fig.width=8, fig.height=3}
+ggplot()+
+  geom_point(aes(x = DOY, y = Cl, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  facet_grid(~SType)
+```
+
+### Nitrate
+
+```{r NO3, fig.width=8, fig.height=3}
+ggplot()+
+  geom_point(aes(x = DOY, y = NO3, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  facet_grid(~SType)
+```
+
+### Sulfate
+
+```{r SO4, fig.width=8, fig.height=3}
+ggplot()+
+  geom_point(aes(x = DOY, y = SO4, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  facet_grid(~SType)
+```
+
+### Nitrate Nitrogen
+
+```{r NO3N, fig.width=8, fig.height=3}
+ggplot()+
+  geom_point(aes(x = DOY, y = NO3N, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  facet_grid(~SType)
+```
+
+### Dissoled Inorganic Nitrogen
+
+```{r DIN, fig.width=8, fig.height=3}
+ggplot()+
+  geom_point(aes(x = DOY, y = DIN, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  facet_grid(~SType)
+```
+
+### Dissolved Organic Nitrogen
+
+```{r DON, fig.width=8, fig.height=3}
+ggplot()+
+  geom_point(aes(x = DOY, y = DON, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  facet_grid(~SType)
+```
+
+### Delta-O-18
+
+```{r d18O, fig.width=8, fig.height=3}
+ggplot()+
+  geom_point(aes(x = DOY, y = d18O, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  facet_grid(~SType)
+```
+
