@@ -10,7 +10,7 @@ Comprehensive characterization of the Lake Agnes rock glacier is a first step in
 
 **Datasets:** 
 
-* Ion concentrations, pH, temperature, and electrical conductivity for seven streams in the basin from summers 2019, 2020, and 2021
+* Ion concentrations, pH, temperature, and electrical conductivity for seven streams in the basin from summers 2019, 2020, and 2021 [-- see preliminary results here](https://briannarick.github.io/1_LakeAgnesRG/src/00_waterQA_import.html)
 
 * Hydrographs for two streams summers 2019, 2020, and 2021
 
