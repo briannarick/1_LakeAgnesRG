@@ -23,7 +23,7 @@ knitr::opts_chunk$set(echo = FALSE,  message = FALSE, warning = FALSE)
 
 setwd("C:/Users/Bri/Documents/CSU/EnvDataScience2022/1_waterQA_RG")
 
-hydroAll <- read.csv("data/AllData_IonIsotope_2019_2021.csv")
+hydroAll <- read.csv("data/waterQA/AllData_IonIsotope_2019_2021.csv")
 
 ```
 
@@ -31,7 +31,7 @@ hydroAll <- read.csv("data/AllData_IonIsotope_2019_2021.csv")
 
 Here we are looking at the water quality data for 7 different streams in the Lake Agnes Basin. Streams are classified as RG (purely rock glacier fed), NRG (no rock glacier source), Mixed (combination of RG and NRG sources), Outlet (outlet stream of the basin, below the lake), RGice (sample taken from the top of the RG, in contact with ice), and Snow (sample of snow). These samples were taken over the years 2019, 2020, and 2021. We are interested in identifying similarities/differences between stream types, as well as trends throughout the season.
 
-![](data/RGlocationfig.jpg)
+![](RGlocationfig.jpg)
 
 ### Total Dissolved Nitrogen
 
@@ -41,7 +41,8 @@ ggplot()+
   theme_bw()+
   theme(legend.position = c(.9, .1))+
   facet_grid(~SType) +
-  xlab("Day of year")
+  xlab("Day of year") +
+  ylab("TDN (mg/L)")
 ```
 
 ### Sodium
@@ -51,7 +52,9 @@ ggplot()+
   geom_point(aes(x = DOY, y = Na, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
   theme_bw()+
   theme(legend.position = c(.9, .1))+
-  facet_grid(~SType)
+  facet_grid(~SType)+
+  xlab("Day of year") +
+  ylab("Na (mg/L)")
 ```
 
 ### Ammonium
@@ -61,7 +64,9 @@ ggplot()+
   geom_point(aes(x = DOY, y = NH4, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
   theme_bw()+
   theme(legend.position = c(.9, .1))+
-  facet_grid(~SType)
+  facet_grid(~SType)+
+  xlab("Day of year") +
+  ylab("Ammonium (mg/L)")
 ```
 
 ### Potassium
@@ -71,7 +76,9 @@ ggplot()+
   geom_point(aes(x = DOY, y = K, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
   theme_bw()+
   theme(legend.position = c(.9, .1))+
-  facet_grid(~SType)
+  facet_grid(~SType)+
+  xlab("Day of year") +
+  ylab("K (mg/L)")
 ```
 
 ### Magnesium
@@ -81,7 +88,9 @@ ggplot()+
   geom_point(aes(x = DOY, y = Mg, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
   theme_bw()+
   theme(legend.position = c(.9, .1))+
-  facet_grid(~SType)
+  facet_grid(~SType)+
+  xlab("Day of year") +
+  ylab("Mg (mg/L)")
 ```
 
 ### Calcium
@@ -91,7 +100,9 @@ ggplot()+
   geom_point(aes(x = DOY, y = Ca, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
   theme_bw()+
   theme(legend.position = c(.9, .1))+
-  facet_grid(~SType)
+  facet_grid(~SType)+
+  xlab("Day of year") +
+  ylab("Ca (mg/L)")
 ```
 
 ### Chlorine
@@ -101,7 +112,9 @@ ggplot()+
   geom_point(aes(x = DOY, y = Cl, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
   theme_bw()+
   theme(legend.position = c(.9, .1))+
-  facet_grid(~SType)
+  facet_grid(~SType)+
+  xlab("Day of year") +
+  ylab("Cl (mg/L)")
 ```
 
 ### Nitrate
@@ -111,7 +124,9 @@ ggplot()+
   geom_point(aes(x = DOY, y = NO3, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
   theme_bw()+
   theme(legend.position = c(.9, .1))+
-  facet_grid(~SType)
+  facet_grid(~SType)+
+  xlab("Day of year") +
+  ylab("Nitrate (mg/L)")
 ```
 
 ### Sulfate
@@ -121,7 +136,9 @@ ggplot()+
   geom_point(aes(x = DOY, y = SO4, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
   theme_bw()+
   theme(legend.position = c(.9, .1))+
-  facet_grid(~SType)
+  facet_grid(~SType)+
+  xlab("Day of year") +
+  ylab("Sulfate (mg/L)")
 ```
 
 ### Nitrate Nitrogen
@@ -131,7 +148,9 @@ ggplot()+
   geom_point(aes(x = DOY, y = NO3N, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
   theme_bw()+
   theme(legend.position = c(.9, .1))+
-  facet_grid(~SType)
+  facet_grid(~SType)+
+  xlab("Day of year") +
+  ylab("Nitrate Nitrogen (mg/L)")
 ```
 
 ### Dissoled Inorganic Nitrogen
@@ -141,7 +160,9 @@ ggplot()+
   geom_point(aes(x = DOY, y = DIN, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
   theme_bw()+
   theme(legend.position = c(.9, .1))+
-  facet_grid(~SType)
+  facet_grid(~SType)+
+  xlab("Day of year") +
+  ylab("Dissolved Inorganic Nitrogen (mg/L)")
 ```
 
 ### Dissolved Organic Nitrogen
@@ -151,7 +172,9 @@ ggplot()+
   geom_point(aes(x = DOY, y = DON, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
   theme_bw()+
   theme(legend.position = c(.9, .1))+
-  facet_grid(~SType)
+  facet_grid(~SType)+
+  xlab("Day of year") +
+  ylab("Dissolved Organic Nitrogen (mg/L)")
 ```
 
 
@@ -162,6 +185,7 @@ ggplot()+
   geom_point(aes(x = DOY, y = pH, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
   theme_bw()+
   theme(legend.position = c(.9, .1))+
+  xlab("Day of year") +
   facet_grid(~SType)
 ```
 
@@ -172,7 +196,9 @@ ggplot()+
   geom_point(aes(x = DOY, y = conductivity, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
   theme_bw()+
   theme(legend.position = c(.9, .1))+
-  facet_grid(~SType)
+  facet_grid(~SType)+
+  xlab("Day of year") +
+  ylab("Electrical Conductivity (microseimens per cm)")
 ```
 
 ### Water Temperature
@@ -182,7 +208,9 @@ ggplot()+
   geom_point(aes(x = DOY, y = Water.T, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
   theme_bw()+
   theme(legend.position = c(.9, .1))+
-  facet_grid(~SType)
+  facet_grid(~SType)+
+  xlab("Day of year") +
+  ylab("Temperature (C)")
 ```
 
 ### Delta-O-18
@@ -192,6 +220,7 @@ ggplot()+
   geom_point(aes(x = DOY, y = d18O, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
   theme_bw()+
   theme(legend.position = c(.9, .1))+
+  xlab("Day of year") +
   facet_grid(~SType)
 ```
 
@@ -202,6 +231,7 @@ ggplot()+
   geom_point(aes(x = DOY, y = d2H, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
   theme_bw()+
   theme(legend.position = c(.9, .1))+
+  xlab("Day of year") +
   facet_grid(~SType)
 ```
 
