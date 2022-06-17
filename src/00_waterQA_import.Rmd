@@ -23,7 +23,7 @@ knitr::opts_chunk$set(echo = FALSE,  message = FALSE, warning = FALSE)
 
 setwd("C:/Users/Bri/Documents/CSU/EnvDataScience2022/1_waterQA_RG")
 
-hydroAll <- read.csv("data/waterQA/AllData_IonIsotope_2019_2021.csv")
+hydroAll <- read.csv("C:/Users/Bri/Documents/CSU/Field Work/WaterSamples/AllData_IonIsotope_2019_2021_June2022.csv")
 
 ```
 
@@ -235,3 +235,29 @@ ggplot()+
   facet_grid(~SType)
 ```
 
+### Hydrogen - Oxygen Isotope comparison
+
+Colors correspond to the stream types in the previous plots. 
+
+```{r isotopes, fig.width=8, fig.height=3}
+ggplot()+
+  geom_point(aes(x = DOY, y = d2H, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  xlab("Day of year") +
+  facet_wrap(~Year)
+
+ggplot()+
+  geom_point(aes(x = DOY, y = d18O, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  xlab("Day of year") +
+  facet_wrap(~Year)
+
+
+ggplot()+
+  geom_point(aes(x = d18O, y = d2H, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  facet_wrap(~Year)
+```
