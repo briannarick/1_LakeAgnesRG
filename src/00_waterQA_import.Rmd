@@ -185,6 +185,7 @@ ggplot()+
   geom_point(aes(x = DOY, y = pH, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
   theme_bw()+
   theme(legend.position = c(.9, .1))+
+  coord_cartesian(ylim = c(6, 9))+
   xlab("Day of year") +
   facet_grid(~SType)
 ```
