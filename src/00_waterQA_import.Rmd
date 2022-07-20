@@ -37,9 +37,9 @@ Here we are looking at the water quality data for 7 different streams in the Lak
 
 ```{r TDN, fig.width=8, fig.height=3}
 ggplot()+
-  geom_point(aes(x = DOY, y = TDN, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  geom_point(aes(x = DOY, y = TDN, color = SType, shape = as.factor(Year) ), data = hydroAll) +
   theme_bw()+
-  theme(legend.position = c(.9, .1))+
+  #theme(legend.position = c(.9, .1))+
   facet_grid(~SType) +
   xlab("Day of year") +
   ylab("TDN (mg/L)")
@@ -49,96 +49,96 @@ ggplot()+
 
 ```{r Na, fig.width=8, fig.height=3}
 ggplot()+
-  geom_point(aes(x = DOY, y = Na, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  geom_point(aes(x = DOY, y = Na.1, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
   theme_bw()+
   theme(legend.position = c(.9, .1))+
   facet_grid(~SType)+
   xlab("Day of year") +
-  ylab("Na (mg/L)")
+  ylab("Na (ueq/L)")
 ```
 
 ### Ammonium
 
 ```{r NH4, fig.width=8, fig.height=3}
 ggplot()+
-  geom_point(aes(x = DOY, y = NH4, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  geom_point(aes(x = DOY, y = NH4.1, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
   theme_bw()+
   theme(legend.position = c(.9, .1))+
   facet_grid(~SType)+
   xlab("Day of year") +
-  ylab("Ammonium (mg/L)")
+  ylab("Ammonium (ueq/L)")
 ```
 
 ### Potassium
 
 ```{r K, fig.width=8, fig.height=3}
 ggplot()+
-  geom_point(aes(x = DOY, y = K, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  geom_point(aes(x = DOY, y = K.1, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
   theme_bw()+
   theme(legend.position = c(.9, .1))+
   facet_grid(~SType)+
   xlab("Day of year") +
-  ylab("K (mg/L)")
+  ylab("K (ueq/L)")
 ```
 
 ### Magnesium
 
 ```{r Mg, fig.width=8, fig.height=3}
 ggplot()+
-  geom_point(aes(x = DOY, y = Mg, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  geom_point(aes(x = DOY, y = Mg.1, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
   theme_bw()+
   theme(legend.position = c(.9, .1))+
   facet_grid(~SType)+
   xlab("Day of year") +
-  ylab("Mg (mg/L)")
+  ylab("Mg (ueq/L)")
 ```
 
 ### Calcium
 
 ```{r Ca, fig.width=8, fig.height=3}
 ggplot()+
-  geom_point(aes(x = DOY, y = Ca, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  geom_point(aes(x = DOY, y = Ca.1, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
   theme_bw()+
   theme(legend.position = c(.9, .1))+
   facet_grid(~SType)+
   xlab("Day of year") +
-  ylab("Ca (mg/L)")
+  ylab("Ca (ueq/L)")
 ```
 
 ### Chlorine
 
 ```{r Cl, fig.width=8, fig.height=3}
 ggplot()+
-  geom_point(aes(x = DOY, y = Cl, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  geom_point(aes(x = DOY, y = CL, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
   theme_bw()+
   theme(legend.position = c(.9, .1))+
   facet_grid(~SType)+
   xlab("Day of year") +
-  ylab("Cl (mg/L)")
+  ylab("Cl (ueq/L)")
 ```
 
 ### Nitrate
 
 ```{r NO3, fig.width=8, fig.height=3}
 ggplot()+
-  geom_point(aes(x = DOY, y = NO3, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  geom_point(aes(x = DOY, y = NO3.1, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
   theme_bw()+
   theme(legend.position = c(.9, .1))+
   facet_grid(~SType)+
   xlab("Day of year") +
-  ylab("Nitrate (mg/L)")
+  ylab("Nitrate (ueq/L)")
 ```
 
 ### Sulfate
 
 ```{r SO4, fig.width=8, fig.height=3}
 ggplot()+
-  geom_point(aes(x = DOY, y = SO4, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  geom_point(aes(x = DOY, y = SO4.1, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
   theme_bw()+
   theme(legend.position = c(.9, .1))+
   facet_grid(~SType)+
   xlab("Day of year") +
-  ylab("Sulfate (mg/L)")
+  ylab("Sulfate (ueq/L)")
 ```
 
 ### Nitrate Nitrogen
@@ -261,3 +261,14 @@ ggplot()+
   theme(legend.position = c(.9, .1))+
   facet_wrap(~Year)
 ```
+
+### EC vs Delta-O-18
+
+```{r, fig.width=8, fig.height=3}
+ggplot()+
+  geom_point(aes(x = conductivity, y = d18O, color = SType, shape = as.factor(Year)), data = hydroAll)+
+  theme_bw()+
+  #  theme(legend.position = c(.9, .1))+
+  xlab("Electrical Conductivity (microseimens per cm)") 
+```
+
