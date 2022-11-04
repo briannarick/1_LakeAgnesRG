@@ -1,0 +1,341 @@
+---
+title: "HydrochemFigure"
+author: "Bri Rick"
+date: '2022-07-29'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(ggplot2)
+library(dplyr)
+library(gridExtra)
+library(tidyr)
+
+knitr::opts_chunk$set(echo = FALSE,  message = FALSE, warning = FALSE)
+```
+
+## R Markdown
+
+```{r cars}
+## Import the water quality data
+
+setwd("C:/Users/Bri/Documents/CSU/EnvDataScience2022/1_waterQA_RG")
+
+hydroAll <- read.csv("C:/Users/Bri/Documents/CSU/Field Work/WaterSamples/AllData_IonIsotope_2019_2021_June2022.csv")
+hydroAll <- hydroAll %>% filter(SType %in% c("Mixed", "NRG", "Outlet", "RG"))
+
+hydroSum <- hydroAll %>% group_by(Date, SType) %>% summarise_if(is.numeric, mean, na.rm=TRUE)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+Na <- ggplot()+
+  geom_point(aes(x = DOY, y = Na.1, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  facet_grid(SType~Year)+
+  xlab("Day of year") +
+  ylab("Na (ueq/L)")+
+  theme(axis.text.x=element_blank(),
+      #axis.ticks.x=element_blank(),
+      axis.text.y=element_blank(),
+      axis.title.x = element_blank(),
+      strip.background = element_blank(), strip.text = element_blank())
+
+Nasum <- ggplot()+
+  geom_point(aes(x = DOY, y = Na.1, color = SType, shape = as.factor(SType), group = Year), data = hydroSum, show.legend = TRUE, alpha = 1, size = 2) +
+  geom_line(aes(x = DOY, y = Na.1, color = SType), data = hydroSum, show.legend = FALSE, se = FALSE, lty = 2, alpha = 0.6)+
+  #geom_line(aes(x = DOY, y = Na.1, color = SType), data = hydroSum, show.legend = FALSE, lty = 2)
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  scale_shape_manual(values=c(8, 4, 2, 3))+
+  facet_grid(cols = vars(Year))+
+  xlab("Day of year") +
+  ylab("Na (ueq/L)")+
+  theme(axis.text.x=element_blank(),
+      #axis.ticks.x=element_blank(),
+      axis.text.y=element_blank(),
+      axis.title.x = element_blank(),
+      strip.background = element_blank(), strip.text = element_blank())
+
+#grid.arrange(Na, Nasum, ncol = 1)
+
+K <- ggplot()+
+  geom_point(aes(x = DOY, y = K.1, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  facet_grid(~SType)+
+  xlab("Day of year") +
+  ylab("K (ueq/L)")+
+  theme(axis.text.x=element_blank(),
+      #axis.ticks.x=element_blank(),
+      axis.text.y=element_blank(),
+      axis.title.x = element_blank(),
+      strip.background = element_blank(), strip.text = element_blank())
+
+Ksum <- ggplot()+
+  geom_point(aes(x = DOY, y = K.1, color = SType, shape = as.factor(SType), group = Year), data = hydroSum, show.legend = FALSE, alpha = 1, size = 2) +
+  geom_line(aes(x = DOY, y = K.1, color = SType), data = hydroSum, show.legend = FALSE, se = FALSE, lty = 2, alpha = 0.6)+
+  #geom_line(aes(x = DOY, y = Na.1, color = SType), data = hydroSum, show.legend = FALSE, lty = 2)
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  scale_shape_manual(values=c(8, 4, 2, 3))+
+  facet_grid(cols = vars(Year))+
+  xlab("Day of year") +
+  ylab("K (ueq/L)")+
+  theme(axis.text.x=element_blank(),
+      #axis.ticks.x=element_blank(),
+      axis.text.y=element_blank(),
+      axis.title.x = element_blank(),
+      strip.background = element_blank(), strip.text = element_blank())
+
+#grid.arrange(Nasum, Ksum)
+
+Mg <- ggplot()+
+  geom_point(aes(x = DOY, y = Mg.1, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  facet_grid(~SType)+
+  xlab("Day of year") +
+  ylab("Mg (ueq/L)")+
+  theme(axis.text.x=element_blank(),
+      #axis.ticks.x=element_blank(),
+      axis.text.y=element_blank(),
+      axis.title.x = element_blank(),
+      strip.background = element_blank(), strip.text = element_blank())
+
+Mgsum <- ggplot()+
+  geom_point(aes(x = DOY, y = Mg.1, color = SType, shape = as.factor(SType), group = Year), data = hydroSum, show.legend = FALSE, alpha = 1, size = 2) +
+  geom_line(aes(x = DOY, y = Mg.1, color = SType), data = hydroSum, show.legend = FALSE, se = FALSE, lty = 2, alpha = 0.6)+
+  #geom_line(aes(x = DOY, y = Na.1, color = SType), data = hydroSum, show.legend = FALSE, lty = 2)
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  scale_shape_manual(values=c(8, 4, 2, 3))+
+  facet_grid(cols = vars(Year))+
+  xlab("Day of year") +
+  ylab("Mg (ueq/L)")+
+  theme(axis.text.x=element_blank(),
+      #axis.ticks.x=element_blank(),
+      axis.text.y=element_blank(),
+      axis.title.x = element_blank(),
+      strip.background = element_blank(), strip.text = element_blank())
+
+Ca <- ggplot()+
+  geom_point(aes(x = DOY, y = Ca.1, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  facet_grid(~SType)+
+  xlab("Day of year") +
+  ylab("Ca (ueq/L)")+
+  theme(axis.text.x=element_blank(),
+      #axis.ticks.x=element_blank(),
+      axis.text.y=element_blank(),
+      axis.title.x = element_blank(),
+      strip.background = element_blank(), strip.text = element_blank())
+
+Casum <- ggplot()+
+  geom_point(aes(x = DOY, y = Ca.1, color = SType, shape = as.factor(SType), group = Year), data = hydroSum, show.legend = FALSE, alpha = 1, size = 2) +
+  geom_line(aes(x = DOY, y = Ca.1, color = SType), data = hydroSum, show.legend = FALSE, se = FALSE, lty = 2, alpha = 0.6)+
+  #geom_line(aes(x = DOY, y = Na.1, color = SType), data = hydroSum, show.legend = FALSE, lty = 2)
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  scale_shape_manual(values=c(8, 4, 2, 3))+
+  facet_grid(cols = vars(Year))+
+  xlab("Day of year") +
+  ylab("Ca (ueq/L)")+
+  theme(axis.text.x=element_blank(),
+      #axis.ticks.x=element_blank(),
+      axis.text.y=element_blank(),
+      axis.title.x = element_blank(),
+      strip.background = element_blank(), strip.text = element_blank())
+
+Cl <- ggplot()+
+  geom_point(aes(x = DOY, y = CL, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  facet_grid(~SType)+
+  xlab("Day of year") +
+  ylab("Cl (ueq/L)")+
+  theme(axis.text.x=element_blank(),
+      #axis.ticks.x=element_blank(),
+      axis.text.y=element_blank(),
+      axis.title.x = element_blank(),
+      strip.background = element_blank(), strip.text = element_blank())
+
+Clsum <- ggplot()+
+  geom_point(aes(x = DOY, y = CL, color = SType, shape = as.factor(SType), group = Year), data = hydroSum, show.legend = FALSE, alpha = 1, size = 2) +
+  geom_line(aes(x = DOY, y = CL, color = SType), data = hydroSum, show.legend = FALSE, se = FALSE, lty = 2, alpha = 0.6)+
+  #geom_line(aes(x = DOY, y = Na.1, color = SType), data = hydroSum, show.legend = FALSE, lty = 2)
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  scale_shape_manual(values=c(8, 4, 2, 3))+
+  facet_grid(cols = vars(Year))+
+  xlab("Day of year") +
+  ylab("Cl (ueq/L)")+
+  theme(axis.text.x=element_blank(),
+      #axis.ticks.x=element_blank(),
+      axis.text.y=element_blank(),
+      axis.title.x = element_blank(),
+      strip.background = element_blank(), strip.text = element_blank())
+
+SO4 <- ggplot()+
+  geom_point(aes(x = DOY, y = SO4.1, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  facet_grid(~SType)+
+  xlab("Day of year") +
+  ylab("Sulfate (ueq/L)")+
+  theme(axis.text.x=element_blank(),
+      #axis.ticks.x=element_blank(),
+      axis.text.y=element_blank(),
+      axis.title.x = element_blank(),
+      strip.background = element_blank(), strip.text = element_blank())
+
+SO4sum <- ggplot()+
+  geom_point(aes(x = DOY, y = SO4.1, color = SType, shape = as.factor(SType), group = Year), data = hydroSum, show.legend = FALSE, alpha = 1, size = 2) +
+  geom_line(aes(x = DOY, y = SO4.1, color = SType), data = hydroSum, show.legend = FALSE, se = FALSE, lty = 2, alpha = 0.6)+
+  #geom_line(aes(x = DOY, y = Na.1, color = SType), data = hydroSum, show.legend = FALSE, lty = 2)
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  scale_shape_manual(values=c(8, 4, 2, 3))+
+  facet_grid(cols = vars(Year))+
+  xlab("Day of year") +
+  ylab("SO4 (ueq/L)")+
+  theme(axis.text.x=element_blank(),
+      #axis.ticks.x=element_blank(),
+      axis.text.y=element_blank(),
+      axis.title.x = element_blank(),
+      strip.background = element_blank(), strip.text = element_blank())
+
+pH <- ggplot()+
+  geom_point(aes(x = DOY, y = pH, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  coord_cartesian(ylim = c(6, 9))+
+  xlab("Day of year") +
+  facet_grid(~SType)+
+  theme(axis.text.x=element_blank(),
+      #axis.ticks.x=element_blank(),
+      axis.text.y=element_blank(),
+      axis.title.x = element_blank(),
+      strip.background = element_blank(), strip.text = element_blank())
+
+pHsum <- ggplot()+
+  geom_point(aes(x = DOY, y = pH, color = SType, shape = as.factor(SType), group = Year), data = hydroSum, show.legend = FALSE, alpha = 1, size = 2) +
+  geom_line(aes(x = DOY, y = pH, color = SType), data = hydroSum, show.legend = FALSE, se = FALSE, lty = 2, alpha = 0.6)+
+  #geom_line(aes(x = DOY, y = Na.1, color = SType), data = hydroSum, show.legend = FALSE, lty = 2)
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  scale_shape_manual(values=c(8, 4, 2, 3))+
+  facet_grid(cols = vars(Year))+
+  xlab("Day of year") +
+  ylab("pH")+
+  ylim(7,8.5)+
+  theme(axis.text.x=element_blank(),
+      #axis.ticks.x=element_blank(),
+      axis.text.y=element_blank(),
+      axis.title.x = element_blank(),
+      strip.background = element_blank(), strip.text = element_blank())
+
+EC <- ggplot()+
+  geom_point(aes(x = DOY, y = conductivity, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  facet_grid(~SType)+
+  xlab("Day of year") +
+  ylab("Electrical Conductivity (microseimens per cm)")+
+  theme(axis.text.x=element_blank(),
+      #axis.ticks.x=element_blank(),
+      axis.text.y=element_blank(),
+      axis.title.x = element_blank(),
+      strip.background = element_blank(), strip.text = element_blank())
+
+ECsum <- ggplot()+
+  geom_point(aes(x = DOY, y = conductivity, color = SType, shape = as.factor(SType), group = Year), data = hydroSum, show.legend = FALSE, alpha = 1, size = 2) +
+  geom_line(aes(x = DOY, y = conductivity, color = SType), data = hydroSum, show.legend = FALSE, se = FALSE, lty = 2, alpha = 0.6)+
+  #geom_line(aes(x = DOY, y = Na.1, color = SType), data = hydroSum, show.legend = FALSE, lty = 2)
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  scale_shape_manual(values=c(8, 4, 2, 3))+
+  facet_grid(cols = vars(Year))+
+  xlab("Day of year") +
+  ylab("Electrical Conductivity (microseimens per cm)")+
+  theme(axis.text.x=element_blank(),
+      #axis.ticks.x=element_blank(),
+      axis.text.y=element_blank(),
+      axis.title.x = element_blank(),
+      strip.background = element_blank(), strip.text = element_blank())
+
+temp <- ggplot()+
+  geom_point(aes(x = DOY, y = Water.T, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  facet_grid(~SType)+
+  xlab("Day of year") +
+  ylab("Temperature (C)")+
+  theme(axis.text.x=element_blank(),
+      #axis.ticks.x=element_blank(),
+      axis.text.y=element_blank(),
+      axis.title.x = element_blank(),
+      strip.background = element_blank(), strip.text = element_blank())
+
+Tsum <- ggplot()+
+  geom_point(aes(x = DOY, y = Water.T, color = SType, shape = as.factor(SType), group = Year), data = hydroSum, show.legend = FALSE, alpha = 1, size = 2) +
+  geom_line(aes(x = DOY, y = Water.T, color = SType), data = hydroSum, show.legend = FALSE, se = FALSE, lty = 2, alpha = 0.6)+
+  #geom_line(aes(x = DOY, y = Na.1, color = SType), data = hydroSum, show.legend = FALSE, lty = 2)
+  theme_bw()+
+  theme(legend.position = c(.9, .1))+
+  scale_shape_manual(values=c(8, 4, 2, 3))+
+  facet_grid(cols = vars(Year))+
+  xlab("Day of year") +
+  ylab("Temperature (C)")+
+  theme(axis.text.x=element_blank(),
+      #axis.ticks.x=element_blank(),
+      axis.text.y=element_blank(),
+      axis.title.x = element_blank(),
+      strip.background = element_blank(), strip.text = element_blank())
+
+hydrochemsum <- grid.arrange(Nasum, Ksum, Mgsum, Casum, Clsum, SO4sum, pHsum, ECsum, Tsum, ncol = 1)
+hydrochemsum
+#hydrochem <- grid.arrange(Na, K, Mg, Ca, Cl, SO4, pH, EC, temp, ncol = 1)
+#hydrochem
+#ggsave("C:/Users/Bri/Documents/CSU/Dissertation/RGFigures/hydrochem.svg", hydrochem, width = 8, height = 8, units = "in", dpi = 300)
+
+ggsave("C:/Users/Bri/Documents/CSU/Dissertation/RGFigures/hydrochemsum.svg", hydrochemsum, width = 8, height = 10, units = "in", dpi = 300)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r}
+hydro_long <- hydroAll %>% pivot_longer(cols = c(Na, K, Mg, Ca, Cl, SO4, pH, conductivity, Water.T), values_to= "measure" )
+
+hydro_longsum <- hydro_long %>% group_by(Date, SType, name) %>% summarise_if(is.numeric, mean, na.rm=TRUE)
+
+hydro_longsum$Date <- as.Date(hydro_longsum$Date, "%m/%d/%Y")
+
+hydro_longsum <- hydro_longsum %>% mutate(daym = format(Date, "%m-%d"))
+hydro_longsum$daym <- as.Date(hydro_longsum$daym, "%m-%d")
+dmhydro <- as.POSIXct(strptime(hydro_longsum$daym, "%m-%d"),tz="MST")
+dmhydro <- format(dmhydro, "%m-%d")
+
+datehydro <- as.POSIXct(strptime(hydro_longsum$Date, "%Y-%m-%d"),tz="MST")
+
+
+lims <- as.POSIXct(strptime(c("06-29-2019","10-15-2021"), format = "%m-%d-%Y"))  
+
+ggplot(hydro_longsum)+
+  geom_line(aes(x = datehydro, y = measure, shape = SType, color = SType), lty = 2, size = 0.2)+
+  geom_point(aes(x = datehydro, y = measure, shape = SType, color = SType))+
+  scale_x_datetime(expand = c(0, 0),
+                   date_labels="%b",
+                   date_breaks = "1 month",
+                   limits = lims)+
+  #geom_smooth(aes(x = DOY, y = measure, shape = SType), lty = 2, method = "lm", se = FALSE, color = "black", size = 0.5)+
+  #xlim(175, 300)+
+  facet_grid(rows = vars(name), cols = vars(Year), scales = "free")+
+  theme_bw()
+```
+

@@ -257,7 +257,7 @@ ggplot()+
 
 
 ggplot()+
-  geom_point(aes(x = d18O, y = d2H, color = SType, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
+  geom_point(aes(x = d18O, y = d2H, color = DOY, shape = as.factor(Year) ), data = hydroAll, show.legend = FALSE) +
   theme_bw()+
   theme(legend.position = c(.9, .1))+
   facet_wrap(~Year)
@@ -266,10 +266,46 @@ ggplot()+
 ### EC vs Delta-O-18
 
 ```{r, fig.width=8, fig.height=3}
-ggplot()+
-  geom_point(aes(x = conductivity, y = d18O, color = SType, shape = as.factor(Year)), data = hydroAll)+
+EC18 <- ggplot()+
+  geom_point(aes(x = conductivity, y = d18O, color = DOY, shape = as.factor(Year)), data = hydroAll, show.legend = FALSE)+
   theme_bw()+
   #  theme(legend.position = c(.9, .1))+
-  xlab("Electrical Conductivity (microseimens per cm)") 
+  xlab("Electrical Conductivity (microseimens per cm)") +
+  facet_wrap(~SType)
+
+#d182H <- 
+  
+ggplot()+
+  geom_point(aes(x = d18O, y = d2H, color = DOY, shape = as.factor(Year)), data = hydroAll)+
+  theme_bw()+
+  #  theme(legend.position = c(.9, .1))+
+  #xlab("Electrical Conductivity (microseimens per cm)") +
+  facet_wrap(~SType)
+
+#iso <- grid.arrange(EC18, d182H, nrow = 1)
+
+#ggsave("C:/Users/Bri/Documents/CSU/Dissertation/RGFigures/isotopes.svg", iso, width = 8, height = 4, units = "in", dpi = 300)
+
+ggplot()+
+  geom_point(aes(x = conductivity, y = d18O, color = DOY, shape = as.factor(SType)), data = hydroAll)+
+  theme_bw()+
+  #  theme(legend.position = c(.9, .1))+
+  xlab("EC")
+  #facet_wrap(~SType)
+
+#ggsave("C:/Users/Bri/Documents/CSU/Dissertation/RGFigures/isoEC.svg", isoEC, width = 3.5, height = 3.5, units = "in", dpi = 300)
+
+#hydroAll %>% filter(SType == "RG") %>% summarize(mean(conductivity, na.rm= TRUE))
+```
+
+### Ca vs pH
+```{r}
+ggplot()+
+  geom_point(aes(x = Ca.1, y = pH, color = SType, shape = as.factor(Year) ), data = hydroAll) +
+  theme_bw()+
+  theme(legend.position = c(.1, .5))+
+  coord_cartesian(ylim = c(6, 9))+
+  xlab("Ca (ueq/L)")
+  #facet_grid(~SType)
 ```
 
